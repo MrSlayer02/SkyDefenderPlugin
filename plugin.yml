@@ -1,0 +1,10 @@
+name: SkyDefender
+main: mrslayer02.skydefender.SkyDefender
+version: 1.0
+author: MrSlayer02
+commands:
+  tpdef:
+    description: Teleporte un defenseur à des coordonnées
+    usage: /tpdef <x> <y> <z>
+    permission: skydefender.tpdef
+    permission-message: Hey ! Tu n'as pas le droit d'utiliser cette commande.
