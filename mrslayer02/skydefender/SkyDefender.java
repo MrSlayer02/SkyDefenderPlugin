@@ -4,20 +4,20 @@ import java.io.File;
 import java.util.HashMap;
 
 import mrslayer02.skydefender.commands.TPDefCommand;
+import mrslayer02.skydefender.player.SkyDefPlayer;
+import mrslayer02.skydefender.scoreboard.PluginScoreboard;
 
-import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class SkyDefender extends JavaPlugin {
-	
-	FileConfiguration config;
-	
+
 	public boolean gameStarted;
 	
 	private HashMap<Player, SkyDefPlayer> skydefPlayers;
+	
+	private PluginScoreboard scoreboard;
 	
 	@Override
 	public void onEnable(){
@@ -28,7 +28,9 @@ public class SkyDefender extends JavaPlugin {
 			this.saveDefaultConfig();
 		}
 		
-		config = this.getConfig();
+		ConfigManager.loadConfig();
+		
+		scoreboard = new PluginScoreboard();
 		
 		getCommand("tpdef").setExecutor(new TPDefCommand());
 		
@@ -38,13 +40,17 @@ public class SkyDefender extends JavaPlugin {
 		
 	}
 	
+	@Override
+	public void onDisable(){
+		this.saveConfig();
+	}
+	
 	public static SkyDefender getPlugin(){
 		return SkyDefender.getPlugin(SkyDefender.class);
 	}
 	
-	@Override
-	public void onDisable(){
-		this.saveConfig();
+	public PluginScoreboard getScoreboard(){
+		return scoreboard;
 	}
 	
 	public SkyDefPlayer getSkyDefPlayer(Player player){
@@ -53,6 +59,10 @@ public class SkyDefender extends JavaPlugin {
 	
 	public void setSkyDefPlayer(Player p, SkyDefPlayer p1){
 		skydefPlayers.put(p, p1);
+	}
+	
+	public World getWorld(){
+		return getServer().getWorlds().get(0);
 	}
 	
 
