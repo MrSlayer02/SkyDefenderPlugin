@@ -1,1 +1,21 @@
+# Ceci est le fichier de configuration pour le plugin Sky Defender #
 
+death-messages:
+  vanilla-messages: false
+  anonymes: true
+  sound: entity_wither_spawn
+  
+waiting-room:
+  minY: 50
+  x: 0
+  y: 100
+  z: 0
+  
+game:
+  nb-teams: 10
+  players-per-team: 4
+  
+castle:
+  x: 0
+  y: 100
+  z: 0
